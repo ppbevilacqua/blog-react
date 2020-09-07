@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBar from "./components/navbar";
 import CardGroup from "./components/cardGroup";
 import Post from "./components/post";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import {connect} from "react-redux";
 
 class App extends Component{
 
@@ -57,4 +57,22 @@ class App extends Component{
 
 }
 
-export default App;
+//export default App;
+const mapStateToProps = (state) => {
+    return {
+        post : state.postReducer
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changePost : (id) => {
+            dispatch({
+                type : "CHANGE_POST",
+                payload : id
+            });
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
