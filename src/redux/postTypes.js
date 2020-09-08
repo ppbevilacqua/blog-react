@@ -1,0 +1,1 @@
+export const CHANGE_POST = "CHANGE_POST";

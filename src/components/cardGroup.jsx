@@ -1,21 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Card from "./card";
 
-class CardGroup extends Component{
+const CardGroup = props => {
 
-    render() {
-        const { cards } = this.props;
+    const { cards } = props;
 
-        return(
-            <div className="card-group">
-                {
-                    cards.map( (card) => (
-                        <Card key = {card.id} card = {card} />
-                    ))
-                }
-            </div>
-        );
-    }
-}
+    return (
+        <div className="card-group">
+        {
+            cards.map( (card) => (
+                <Card key = {card.id} card = {card} changePost={ props.changePost }/>
+            ))
+        }
+    </div>
+    )
+};
 
 export default CardGroup;
+

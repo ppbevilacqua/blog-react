@@ -1,14 +1,30 @@
 import React from "react";
+import { changePost } from "../redux/postAction";
+import { connect } from "react-redux";
+import data from "../fetchCards";
 
+const Post = props => {
 
-export default function Post( {match} ){
+    const card = data.cards.find( card => card.id === props.currentIdPost) ;
 
-    // match contiene l'id del post da visualizzare
-
-    return(
+    return (
         <div className="m-2">
-            <h3>Titolo</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
         </div>
     );
 }
+
+const mapStateToProps = ( {post} ) => {
+    return {
+        currentIdPost : post.currentIdPost
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changePost : (id) => dispatch( changePost(id))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
