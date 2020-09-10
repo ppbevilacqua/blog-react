@@ -1,23 +1,22 @@
 import React from "react";
 import { changePost } from "../redux/postAction";
 import { connect } from "react-redux";
-import data from "../fetchCards";
 
-const Post = props => {
+const Post = ( {match, expandedPost} ) => {
 
-    const card = data.cards.find( card => card.id === props.currentIdPost) ;
-
-    return (
-        <div className="m-2">
-            <h3>{card.title}</h3>
-            <p>{card.text}</p>
-        </div>
-    );
+    console.log();
+    return expandedPost && expandedPost.title ?
+        (
+            <div className="m-2">
+                <h3>{expandedPost.title}</h3>
+                <p>{expandedPost.body}</p>
+            </div>
+     ) : ( <div> <h3>Errore caricamento post </h3></div>);
 }
 
 const mapStateToProps = ( {post} ) => {
     return {
-        currentIdPost : post.currentIdPost
+        expandedPost : post.expandedPost
     };
 };
 
